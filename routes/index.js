@@ -7,7 +7,11 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/register', (req, res, next) => {
-    res.render('index', {})
+    res.render('register', {})
+})
+
+router.post('/sanitize', (req, res, next) => {
+    res.render('landing', { name: req.body.name, email: req.body.email, password: req.body.password })
 })
 // router.get('/register', (req, res, next) => {
 //     res.render('register', { title: 'wow' })

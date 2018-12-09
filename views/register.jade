@@ -2,7 +2,7 @@ extends layout
 
 block content
   h2 Sign Up
-  form(method='POST' action='/register')
+  form(method='POST' action='/sanitize')
       div.form-group
         label(for='name') Name:
         br
@@ -20,5 +20,3 @@ block content
         br
         input#pw2.form-control(type='password' name='confirmPassword')
       button.btn.btn-primary(type='submit') Sign up
-  //- h1= title
-  //- p Welcome to #{title}
