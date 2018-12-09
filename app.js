@@ -1,22 +1,30 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+const cookieParser = require('cookie-parser');
+const createError = require('http-errors');
+require('dotenv').config();
+const express = require('express');
+const logger = require('morgan');
+const path = require('path');
+const app = express();
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+const indexRouter = require('./routes/index');
+const registerRouter = require('./routes/register');
+const usersRouter = require('./routes/users');
 
-var app = express();
 
-// var MongoClient = require('mongodb').MongoClient;
-// var url = "mongodb://localhost:27017/mydb";
-//
-// MongoClient.connect(url, function(err, db) {
-//     // if (err) throw err;
-//     console.log("Database created!");
-//     db.close();
-// });
+const MongoClient = require('mongodb').MongoClient;
+const uri = process.env.MONGO_DB;
+
+// replace the uri string with your connection string.
+MongoClient.connect(uri, function(err, client) {
+   if(err) {
+        console.log('Error occurred while connecting to MongoDB Atlas...\n',err);
+   }
+   console.log('Connected...');
+   const collection = client.db("MatchaDB").collection("users");
+   console.log(collection.users);
+   // perform actions on the collection object
+   client.close();
+});
 
 
 // view engine setup
@@ -32,6 +40,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
+app.use('/register', registerRouter);
+app.use('/sanitize', registerRouter);
 app.use('/users', usersRouter);
 
 // catch 404 and forward to error handler
