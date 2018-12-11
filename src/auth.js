@@ -1,5 +1,5 @@
 var bodyParser = require("body-parser");
-var Aural = require('../Aural/aural.js')
+var Aural = require('./Aural/aural.js')
 var fs = require('fs');
 var serialize = require('node-serialize');
 var crypto = require("crypto"),
@@ -8,7 +8,7 @@ var crypto = require("crypto"),
 var firstExec = true;
 var exports = module.exports = {};
 
-const db = new Aural("passwd", "./db/passwd.json", {
+const db = new Aural("passwd", "./private/passwd/passwd.json", {
     login: {},
     passwd: {}
 })
@@ -42,6 +42,7 @@ decrypt = (text) => {
 
 module.exports = {
     handleLogin: (query) => {
+        console.log(query);
         if (firstExec == true) {
             firstExec = false
             if (!fs.existsSync('./private')) {
@@ -61,9 +62,11 @@ module.exports = {
                     passwd
                 })
                 console.log('OK');
-                return ('OK')
+                return true;
             }
         }
+        console.log('Error... user exists');
+        return false;
     },
     checkLogin: (login, passwd) => {
         data = db.getAll().entries
@@ -71,24 +74,27 @@ module.exports = {
             if (data[name].login != serialize.serialize(login))
                 continue;
             else {
-                console.log("Error");
-                return false
+                console.log("OK");
+                return true
             }
         }
-        return true
+        console.log('ERROR');
+        return false
     },
     checkPasswd: (login, passwd) => {
+        // console.log(login + ' ' + passwd);
         data = db.getAll().entries
         if (passwd && login) {
             for (var name in data) {
-                if (data[name].login != serialize.serialize(login) && data[name].passwd != encrypt(passwd))
+                if (data[name].login != serialize.serialize(login) && data[name].passwd != encrypt(passwd)) {
                     continue;
-                else {
-                    console.log("Error");
-                    return false
+                } else {
+                    console.log("OK");
+                    return true
                 }
             }
         }
-        return true
+        console.log('ERROR');
+        return false
     }
 }

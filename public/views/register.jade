@@ -24,7 +24,8 @@ block content
         br
         input#pw.form-control(type='password' name='password')
       div.form-group
-        label(for='pw2') Confirm Password:
+        label(for='pw') Profile Picture:
         br
-        input#pw2.form-control(type='password' name='confirmPassword')
+        input#pw.form-control(type="file" name="pic" accept="image/*" download="image.jpg" href="./../../public/images/")
+
       button.btn.btn-primary(type='submit' class="button") Sign up
