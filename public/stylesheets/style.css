@@ -2,6 +2,7 @@ body {
     margin: 0 auto;
     font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
     animation: change-background ease 10s infinite alternate;
+    color: #2A324B;
 }
 
 @keyframes change-background {
@@ -124,7 +125,9 @@ button,.reglog {
 
 .footnote {
     font-size: 10px;
-    animation: change-text 10s infinite alternate;
+    /* animation: change-text 10s infinite alternate; */
+    color: black;
+    text-decoration: none;
 }
 
 @keyframes change-text {
@@ -146,8 +149,29 @@ button,.reglog {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     width: 60%;
     text-align: center;
-    background: #f4d6db;
+    background: #FCFCFC;
     margin-bottom: 5%;
+    padding-bottom: 1%;
+    border-radius: 2%;
+    animation: change-profile 10s infinite alternate;
+}
+
+@keyframes change-profile {
+    0% {
+        background: #f4d6db;
+    }
+
+    50% {
+        background: #69b7eb;
+    }
+
+    100% {
+        background: #f4d6db;
+    }
+}
+.pheader {
+    padding-top: 5%;
+    padding-bottom: 1%;
 }
 
 .pinfo {
@@ -155,9 +179,7 @@ button,.reglog {
     text-align: center;
 }
 
-.pimage {
-    padding: 5px;
-    margin: 0 auto;
-    height: 50%;
-    width: 50%;
+.pimg {
+
+    border-radius: 50%;
 }
