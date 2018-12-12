@@ -1,8 +1,19 @@
-extends layout
-
-block content
-  a(id='submit' href='/register')
-    div(class='button') Register
-  br
-  a(id='submit' href='/login')
-    div(class='button') Login
+doctype html
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    meta(name="viewport" content="initial-scale=1")
+  body
+    div(id='homepage')
+      a(id='header', href='/')
+        h1 M A T C H A
+    br
+    div(id='wrapper')
+      a(id='submit' href='/register')
+        div(class='button') Register
+      br
+      a(id='submit' href='/login')
+        div(class='button') Login
+    div(class="footer")
+      p(class="footnote") Created by cpk42

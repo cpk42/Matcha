@@ -24,7 +24,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 //set routes here
 app.use('/', indexRouter);
 app.use('/register', registerRouter);
-app.use('/sanitize', registerRouter);
+app.use('/landing', registerRouter);
 app.use('/login', loginRouter);
 app.use('/check', loginRouter);
 

@@ -1,7 +1,10 @@
 extends layout
 
 block content
-    h1 Welcome! #{upload.name}
-    p= upload.email
-    p= upload.gender
-    p= upload.info
+    div(class="profile")
+        div(class="imagewrapper")
+            img(class="pimg" src="../images/me.jpg" alt="sike" width="300" height="300")
+        p(class="pinfo")= upload.name
+        p(class="pinfo")= upload.email
+        p(class="pinfo")= upload.gender
+        p(class="pinfo")= upload.info

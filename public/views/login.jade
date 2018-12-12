@@ -1,7 +1,7 @@
 extends layout
 
 block content
-  form(method='POST' action='/sanitize')
+  form(method='POST' action='/landing')
     div.form-group
       label(for='name') Email:
       br
@@ -10,4 +10,9 @@ block content
       label(for='email') Password:
       br
       input#email.form-control(type='password', placeholder='Password' name='password')
+    br
     button.btn.btn-primary(type='submit' class="button") Login
+    br
+    br
+    a(id='submit' href='/register')
+      div(class='button reglog') Register

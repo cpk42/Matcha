@@ -1,16 +1,11 @@
+var Aural = require('../src/Aural/aural');
+var auth = require('../src/auth.js');
 var express = require('express');
 var router = express.Router();
 var path = require('path');
-var Aural = require('../src/Aural/aural');
-var auth = require('../src/auth.js');
-var path = require('path');
-
-console.log(auth);
-
 
 var db = new Aural('userdb', './public/db/userdb.json')
 db.init()
-// const findUser = ()
 
 router.get('/', (req, res, next) => {
     res.render('register', {})
@@ -18,13 +13,13 @@ router.get('/', (req, res, next) => {
 
 router.post('/', (req, res, next) => {
     var user = req.body;
-    var upload = {
+    var upload = Object.assign({
         name: user.name,
         email: user.email,
         gender: user.gender,
         info: user.info,
         pic: user.pic
-    }
+    }, upload);
     if (req.body.email && req.body.password && !req.body.name) {
         upload = handleLogin(req.body.email, req.body.password);
         if (upload.email) {
@@ -32,7 +27,9 @@ router.post('/', (req, res, next) => {
                 upload
             })
         } else {
-            res.render('error', {msg: 'Incorrect login'})
+            res.render('error', {
+                msg: 'Incorrect login'
+            })
         }
     } else {
         var check = handleRegister(user, upload);
@@ -41,7 +38,9 @@ router.post('/', (req, res, next) => {
                 upload
             })
         } else {
-            res.render('error', { msg: 'User exists' })
+            res.render('error', {
+                msg: 'User exists'
+            })
         }
     }
 })
@@ -75,6 +74,7 @@ var handleLogin = (email, password) => {
                 upload.email = data[i].email;
                 upload.gender = data[i].gender;
                 upload.info = data[i].info;
+                upload.pic = data[i].pic
             }
         console.log(upload);
         return (upload)
