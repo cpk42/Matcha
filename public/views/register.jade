@@ -1,35 +1,55 @@
 extends layout
 
 block content
-  h2 Sign Up
-  form(method='POST' action='/landing')
-      div.form-group
-        label(for='name') Name:
+    h2 Sign Up
+    form(method='POST' action='/landing')
+        div.form-group
+            label(for='name') First name:
+            br
+            input#name.form-control(type='text', placeholder='First name' name='fname')
+        div.form-group
+            label(for='name') Last name:
+            br
+            input#name.form-control(type='text', placeholder='Last name' name='lname')
+        div.form-group
+            label(for='email') Email:
+            br
+            input#email.form-control(type='email', placeholder='name@email.com' name='email')
+        div.form-group
+            label(for='gender') Gender:
+            br
+            input#name.form-control(type='text', placeholder='Input your sex' name='gender')
+        div.form-group
+            label(for='preferences') Sexual Preference:
+            br
+            br
+            div(class="inputGroup")
+                label(for="prefselect1") Straight
+                input(id="prefselect1" class="preferences" type="radio" name="preferences" value="Straight")
+                br
+            div(class="inputGroup")
+                label(for="prefselect2") Gay
+                input(id="prefselect2" class="preferences" type="radio" name="preferences" value="Gay")
+                br
+            div(class="inputGroup")
+                label(for="prefselect3") Bi
+                input(id="prefselect3" class="preferences" type="radio" name="preferences" value="Bi")
+                br
+        div.form-group
+            label(for='info') Information:
+            br
+            input#email.form-control(type='text', placeholder='Tell us about yourself' name='info')
+        div.form-group
+            label(for='pw') Password:
+            br
+            input#pw.form-control(type='password' name='password')
+        div.form-group
+            label(for='pw') Profile Picture:
+            br
+            input#pw.form-control(type="file" name="pic" accept="image/*" download="image.jpg" href="./")
         br
-        input#name.form-control(type='text', placeholder='First and last' name='name')
-      div.form-group
-        label(for='email') Email:
+        button.btn.btn-primary(type='submit' class="button") Sign up
         br
-        input#email.form-control(type='email', placeholder='name@email.com' name='email')
-      div.form-group
-        label(for='gender') Gender:
         br
-        input#email.form-control(type='text', placeholder='Input your sex' name='gender')
-      div.form-group
-        label(for='info') Information:
-        br
-        input#email.form-control(type='text', placeholder='Tell us about yourself' name='info')
-      div.form-group
-        label(for='pw') Password:
-        br
-        input#pw.form-control(type='password' name='password')
-      div.form-group
-        label(for='pw') Profile Picture:
-        br
-        input#pw.form-control(type="file" name="pic" accept="image/*" download="image.jpg" href="./")
-      br
-      button.btn.btn-primary(type='submit' class="button") Sign up
-      br
-      br
-      a(id='submit' href='/login')
-        div(class='button reglog') Login
+        a(id='submit' href='/login')
+            div(class='button reglog') Login

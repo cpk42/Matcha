@@ -14,13 +14,23 @@ router.get('/', (req, res, next) => {
 router.post('/', (req, res, next) => {
     var user = req.body;
     var upload = Object.assign({
-        name: user.name,
+        fname: user.fname,
+        lname: user.lname,
         email: user.email,
         gender: user.gender,
+        preferences: user.preferences,
         info: user.info,
-        pic: user.pic
+        profilePic: user.profilePic,
+        tags: [],
+        images: [],
+        seen: [],
+        likes: [],
+        fame: 0,
+        location: ''
+
     }, upload);
-    if (req.body.email && req.body.password && !req.body.name) {
+    console.log(upload);
+    if (req.body.email && req.body.password && !req.body.gender) {
         upload = handleLogin(req.body.email, req.body.password);
         if (upload.email) {
             res.render('landing', {
@@ -59,27 +69,43 @@ var handleRegister = (user, upload) => {
 
 var handleLogin = (email, password) => {
     var upload = {
-        name: '',
+        fname: '',
+        lname: '',
         email: '',
         gender: '',
+        preferences: '',
         info: '',
-        pic: ''
+        profilePic: '',
+        tags: [],
+        images: [],
+        seen: [],
+        likes: [],
+        fame: 0,
+        location: ''
     }
     if (auth.checkPasswd(email, password)) {
         var user
         var data = db.getAll().entries
         for (var i = 0; data[i]; i++)
             if (data[i].email == email) {
-                upload.name = data[i].name;
+                upload.fname = data[i].fname;
+                upload.lname = data[i].lname;
                 upload.email = data[i].email;
                 upload.gender = data[i].gender;
+                upload.preferences = data[i].preferences,
                 upload.info = data[i].info;
-                upload.pic = data[i].pic
+                upload.profilePic = data[i].profilePic;
+                upload.tags = data[i].tags;
+                upload.images = data[i].images;
+                upload.seen = data[i].seen;
+                upload.likes = data[i].likes;
+                upload.fame = data[i].fame;
+                upload.location = data[i].location;
             }
-        console.log(upload);
+        // console.log(upload);
         return (upload)
     }
     return (upload);
 }
-// module.exports = router;
+
 module.exports = router;

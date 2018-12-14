@@ -5,7 +5,7 @@ var serialize = require('node-serialize');
 var crypto = require("crypto"),
     algorithm = 'aes-256-ctr',
     password = 'd6F3Efeq';
-var firstExec = true;
+let firstExec = true;
 var exports = module.exports = {};
 
 const db = new Aural("passwd", "./private/passwd/passwd.json", {
@@ -42,7 +42,6 @@ decrypt = (text) => {
 
 module.exports = {
     handleLogin: (query) => {
-        console.log(query);
         if (firstExec == true) {
             firstExec = false
             if (!fs.existsSync('./private')) {
@@ -70,8 +69,9 @@ module.exports = {
     },
     checkLogin: (login, passwd) => {
         data = db.getAll().entries
+        console.log('HERE');
         for (var name in data) {
-            if (data[name].login != serialize.serialize(login))
+            if (data[name].login != serialize.serialize(login) && data[name].passwd != encrypt(passwd))
                 continue;
             else {
                 console.log("OK");
@@ -82,15 +82,16 @@ module.exports = {
         return false
     },
     checkPasswd: (login, passwd) => {
+        console.log('here');
         // console.log(login + ' ' + passwd);
         data = db.getAll().entries
         if (passwd && login) {
             for (var name in data) {
-                if (data[name].login != serialize.serialize(login) && data[name].passwd != encrypt(passwd)) {
-                    continue;
+                if (data[name].login == serialize.serialize(login) && data[name].passwd == encrypt(passwd)) {
+                    return true;
                 } else {
-                    console.log("OK");
-                    return true
+                    console.log('OK');
+                    continue;
                 }
             }
         }

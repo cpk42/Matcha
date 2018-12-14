@@ -2,10 +2,16 @@ extends layout
 
 block content
     div(class="profile")
-        div(class="pimgwrapper")
-            p(class="pheader")= upload.name
         div(class="imagewrapper")
+            //- div(class="imagelayover")
             img(class="pimg" src="../images/me.jpg" alt="sike" width="300" height="300")
-        p(class="pinfo")= upload.email
-        p(class="pinfo")= upload.gender
-        p(class="pinfo")= upload.info
+            div(class="pheader")
+                h1(class="phead") #{upload.fname} #{upload.lname}
+                h2(class="pinfo")= upload.preferences
+                h3(class="pinfo")= upload.gender
+                h2 Fame:
+                div(class="famewrapper")
+                    h1= upload.fame
+                h5(class="psubinfo")= upload.email
+                p(class="psubinfo")= upload.info
+            //- a(href='/browse' class="routebutton")
